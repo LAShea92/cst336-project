@@ -37,11 +37,11 @@ app.get("/cart", function(req,res){
   res.render("cart");
 });
 
-// app.listen("8081", "0.0.0.0", function(){
-//    console.log("Express Server is running...")
-// })
+app.listen("8081", "0.0.0.0", function(){
+   console.log("Express Server is running...")
+})
 
 //server listener
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("Express server is running...")
-});
+// app.listen(process.env.PORT, process.env.IP, function(){
+//    console.log("Express server is running...")
+// });
