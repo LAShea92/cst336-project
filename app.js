@@ -10,15 +10,28 @@ const tools = require("./tools.js");
 
 //root route
 app.get("/", function(req, res){
-    res.render("index");
-});//root route
+	res.render("index");
+});
 
 app.get("/itemDetail", function(req,res){
   res.render("detail");
 });
 
+// app.get("/engines", function(req, res){
+// 	res.render("engines");
+// });
+
 app.get("/engines", function(req,res){
-  res.render("engines");
+  let conn = tools.createConnection();
+	var sql = "SELECT name, description, price, dateAdded, imgSrc FROM `engines` ORDER BY dateAdded"
+	
+	conn.connect(function(err){
+		if(err) throw err;
+		conn.query(sql, function(err, results){
+			if(err) throw err;
+			res.render("engines", {"rows":results});
+		});
+	});
 });
 
 app.get("/transmissions", function(req,res){
