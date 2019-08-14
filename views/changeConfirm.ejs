@@ -1,0 +1,60 @@
+<% include partials/header %>
+    <h1>Administration</h1>
+    <% include partials/nav %>
+    
+    <!-- 
+          There should be a function here that will 
+     	  create a majority of the page depending on the 
+     	  request passed in. 
+     	  If add, create the add page.
+     	  If remove, create the remove page.
+     	  If edit, create the edit page.
+     -->
+     
+<br>     
+     
+<form action="/adminSelect" style="text-align: center">
+
+<button class="returnBtn btn btn-info"> <- Back </button>
+
+</form>
+
+<br> 
+     
+<div id="adReq"></div>
+
+<script>
+window.onload = function(){
+	pageSetup();
+}
+
+function pageSetup() {
+	var part = getUrlVars()["partChoice"];
+	if (part == "engine"){
+		var series = getUrlVars()["seriesType"];
+		var description = getUrlVars()["engineDescription"];
+		var price = getUrlVars()["enginePrice"];
+		var miles = getUrlVars()["engineMiles"];
+	}
+	else if (part == "transmission"){
+		var series = getUrlVars()["seriesType"];
+		var quantity = getUrlVars()["transmissionQuantity"];
+		var price = getUrlVars()["transmissionPrice"];
+	}
+	else if (part == "usedPart"){
+		var partType = getUrlVars()["usedPartType"];
+		var description = getUrlVars()["usedPartDescription"];
+		var price = getUrlVars()["usedPartPrice"];
+	}
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+</script>
+
+<% include partials/footer %>

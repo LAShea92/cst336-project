@@ -44,15 +44,16 @@
 <script id="engineBlock">
 	<br>
 	Please Enter a Name for the Engine: <input type="text" id="engineName"> <br>
-	Please Select a Series for the Engine: 	B <input type="radio" name="seriesType" onchange="radioCheck()"
+	Please Select a Series for the Engine: 	B <input type="radio" name="seriesType" 
 		id="q1Choice1" value="b"> |
-		K <input type="radio" name="seriesType" onchange="radioCheck()"
+		K <input type="radio" name="seriesType"
 			id="q1Choice2" value="k"> |
-		D <input type="radio" name="seriesType" onchange="radioCheck()"
+		D <input type="radio" name="seriesType"
 			id="q1Choice3" value="d"> <br>
-	Please Give a Description for the Engine: <textarea id="engineDescription" rows="5" cols="40" maxlength="250"></textarea> <br>
-	Please Enter a Price: <input type="text" id="enginePrice"> <br>
-	Please Enter the Miles: <input type="text" id="engineMiles"> <br><br>
+	Please Give a Description for the Engine: <textarea name="engineDescription" 
+	id="engineDescription" rows="5" cols="40" maxlength="250"></textarea> <br>
+	Please Enter a Price: <input type="text" name="enginePrice" id="enginePrice"> <br>
+	Please Enter the Miles: <input type="text" name="engineMiles" id="engineMiles"> <br><br>
 	
 	<button class="setupBtn btn btn-success">Add Engine</button>
 </script>
@@ -60,11 +61,11 @@
 <script id="transmissionBlock">
 	<br>
 	Please Enter a Name for the Transmission: <input type="text" id="transmissionName"> <br>
-	Please Enter a Price: <input type="text" id="transmissionPrice"> <br>
-	Please Enter a Quantity: <input type="text" id="transmissionQuantity"> <br>
-	Please Select Manual or Automatic: Manual <input type="radio" name="seriesType" onchange="radioCheck()"
+	Please Enter a Price: <input type="text" name="transmissionPrice" id="transmissionPrice"> <br>
+	Please Enter a Quantity: <input type="text" name="transmissionQuantity" id="transmissionQuantity"> <br>
+	Please Select Manual or Automatic: Manual <input type="radio" name="seriesType"
 		id="q1Choice1" value="manual"> |
-		Automatic <input type="radio" name="seriesType" onchange="radioCheck()"
+		Automatic <input type="radio" name="seriesType"
 			id="q1Choice2" value="auto"> <br><br>
 	
 	<button class="setupBtn btn btn-success">Add Transmission</button>
@@ -73,9 +74,10 @@
 <script id="usedPartBlock">
 	<br>
 	Please Enter a Name for the Part: <input type="text" id="usedPartName"> <br>
-	Please Give a Description for the Part: <textarea id="usedPartDescription" rows="5" cols="40" maxlength="250"></textarea> <br>
-	Please Enter a Price: <input type="text" id="usedPartPrice"> <br>
-	Please Enter a Type: <input type="text" id="usedPartType"> <br><br>
+	Please Give a Description for the Part: <textarea name="usedPartDescription" id="usedPartDescription" 
+	rows="5" cols="40" maxlength="250"></textarea> <br>
+	Please Enter a Price: <input type="text" name="usedPartPrice" id="usedPartPrice"> <br>
+	Please Enter a Type: <input type="text" name="usedPartType" id="usedPartType"> <br><br>
 	
 	<button class="setupBtn btn btn-success">Add Used Part</button>
 
@@ -166,42 +168,6 @@ function addCheck() {
 		
 		$("#additionalInfo").empty();
 		$("#additionalInfo").append(document.getElementById('usedPartBlock').innerHTML);
-	}
-}
-
-function removeCheck() {
-	if(document.getElementById("q1Choice1").checked == true){
-		
-		$("#additionalInfo").empty();
-		$("#additionalInfo").append(document.getElementById('removeEngineBlock').innerHTML);
-	}
-	else if(document.getElementById("q1Choice2").checked == true){
-		
-		$("#additionalInfo").empty();
-		$("#additionalInfo").append(document.getElementById('removeTransmissionBlock').innerHTML);
-	}
-	else if(document.getElementById("q1Choice3").checked == true){
-		
-		$("#additionalInfo").empty();
-		$("#additionalInfo").append(document.getElementById('removeUsedPartBlock').innerHTML);
-	}
-}
-
-function typeCheck() {
-	if(document.getElementById("q1Choice1").checked == true){
-		document.getElementById("q1Choice1").value = 1;
-		document.getElementById("q1Choice2").value = 0;
-		document.getElementById("q1Choice3").value = 0;
-	}
-	else if(document.getElementById("q1Choice2").checked == true){
-		document.getElementById("q1Choice1").value = 0;
-		document.getElementById("q1Choice2").value = 1;
-		document.getElementById("q1Choice3").value = 0;
-	}
-	else if(document.getElementById("q1Choice3").checked == true){
-		document.getElementById("q1Choice1").value = 0;
-		document.getElementById("q1Choice2").value = 0;
-		document.getElementById("q1Choice3").value = 1;
 	}
 }
 
