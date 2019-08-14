@@ -21,32 +21,167 @@
 
 <br> 
      
-<div id="adReq"></div>
+<div id="promptField" style="text-align: center"></div>
+
+<script id="enginePrompt">
+	Would you like to add the following engine?
+		<div id=engineName>Name: </div> <br>
+		<div id=engineSeries>Series: </div> <br>
+		<div id=engineDescription>Description: </div> <br>
+		<div id=enginePrice>Price: </div> <br>
+		<div id=engineMiles>Miles: </div> <br>
+</script>
+
+<script id="transmissionPrompt">
+	Would you like to add the following transmission?
+		<div id=transmissionName>Name: </div> <br>
+		<div id=transmissionSeries>Series: </div> <br>
+		<div id=transmissionPrice>Price: </div> <br>
+		<div id=transmissionQuantity>Quantity: </div> <br>
+</script>
+
+<script id="usedPartPrompt">
+	Would you like to add the following used part?
+		<div id=usedPartName>Name: </div> <br>
+		<div id=usedPartType>Type: </div> <br>
+		<div id=usedPartDescription>Description: </div> <br>
+		<div id=usedPartPrice>Price: </div> <br>
+</script>
+
+<script id="confirmButtons">
+
+<button class="noBtn btn btn-danger">
+	No
+</button>
+<button class="yesBtn btn btn-success">
+	Yes
+</button>
+</script>
 
 <script>
 window.onload = function(){
 	pageSetup();
 }
 
+$(".yesBtn").on("click", function(){
+	var part = getPart();
+	if (part == "engine"){
+		addItem(getPart(), getEngineName(), getSeries(), getDescription(), getPrice(), getMiles(), NULL, NULL);
+	}
+	else if (part == "transmission"){
+		addItem(getPart(), getTransmissionName(), getSeries(), NULL, getPrice(), NULL, getQuantity(), NULL);
+	}
+	else if (part == "usedPart"){
+		addItem(getPart(), getUsedPartName(), NULL, getDescription(), getPrice(), NULL, NULL, NULL);
+	}
+});
+
+function getPart(){
+	var part = getUrlVars()["partChoice"];
+	return part;
+}
+
+function getEngineName(){
+	var part = getUrlVars()["engineName"];
+	return part;
+}
+
+function getSeries(){
+	var part = getUrlVars()["seriesType"];
+	return part;
+}
+
+function getEngineDescription(){
+	var part = getUrlVars()["engineDescription"];
+	return part;
+}
+
+function getPrice(){
+	var part = getUrlVars()["enginePrice"];
+	return part;
+}
+
+function getMiles(){
+	var part = getUrlVars()["engineMiles"];
+	return part;
+}
+
+function getTransmissionName(){
+	var part = getUrlVars()["transmissionName"];
+	return part;
+}
+
+function getQuantity(){
+	var part = getUrlVars()["transmissionQuantity"];
+	return part;
+}
+
+function getUsedPartName(){
+	var part = getUrlVars()["usedPartName"];
+	return part;
+}
+
 function pageSetup() {
 	var part = getUrlVars()["partChoice"];
 	if (part == "engine"){
+		document.getElementById("promptField").innerHTML = document.getElementById('enginePrompt').innerHTML;
+		var name = getUrlVars()["engineName"];
 		var series = getUrlVars()["seriesType"];
 		var description = getUrlVars()["engineDescription"];
 		var price = getUrlVars()["enginePrice"];
 		var miles = getUrlVars()["engineMiles"];
+		$("#engineName").append(name);
+		$("#engineSeries").append(series);
+		$("#engineDescription").append(description);
+		$("#enginePrice").append(price);
+		$("#engineMiles").append(miles);
+		$("#promptField").append(document.getElementById('confirmButtons').innerHTML)
 	}
 	else if (part == "transmission"){
+		document.getElementById("promptField").innerHTML = document.getElementById('transmissionPrompt').innerHTML;
+		var name = getUrlVars()["transmissionName"];
 		var series = getUrlVars()["seriesType"];
 		var quantity = getUrlVars()["transmissionQuantity"];
 		var price = getUrlVars()["transmissionPrice"];
+		$("#transmissionName").append(name);
+		$("#transmissionSeries").append(series);
+		$("#transmissionPrice").append(price);
+		$("#transmissionQuantity").append(quantity);
+		$("#promptField").append(document.getElementById('confirmButtons').innerHTML)
 	}
 	else if (part == "usedPart"){
+		document.getElementById("promptField").innerHTML = document.getElementById('usedPartPrompt').innerHTML;
+		var name = getUrlVars()["usedPartName"];
 		var partType = getUrlVars()["usedPartType"];
 		var description = getUrlVars()["usedPartDescription"];
 		var price = getUrlVars()["usedPartPrice"];
+		$("#usedPartName").append(name);
+		$("#usedPartType").append(partType);
+		$("#usedPartPrice").append(price);
+		$("#usedPartDescription").append(description);
+		$("#promptField").append(document.getElementById('confirmButtons').innerHTML)
 	}
+	
 }
+
+function addItem(partType, name, series, description, price, miles, quantity, usedPartType){
+	
+	$.ajax({
+		method: "get",
+		url: "/api/addItems",
+		data: {
+			   "partType" : partType,
+			   "name" : name,
+			   "series" : series,
+			   "description" : description,
+			   "price" : price,
+			   "miles" : miles,
+			   "quantity" : quantity,
+			   "usedPartType" : usedPartType
+			  }
+	});//AJAX
+	
+};
 
 function getUrlVars() {
     var vars = {};

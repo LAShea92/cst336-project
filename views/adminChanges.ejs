@@ -24,7 +24,7 @@
 <div id="adReq"></div>
 
 <script id="addBlock">
-	<form id="addItem" style="text-align: center; display: show">
+	<form id="addItem" action="/changeConfirm" style="text-align: center; display: show">
 	Would you like to add an Engine, Transmission, or Used Part?
 	
 	<div id="question1">
@@ -43,7 +43,7 @@
 
 <script id="engineBlock">
 	<br>
-	Please Enter a Name for the Engine: <input type="text" id="engineName"> <br>
+	Please Enter a Name for the Engine: <input type="text" name="engineName" id="engineName"> <br>
 	Please Select a Series for the Engine: 	B <input type="radio" name="seriesType" 
 		id="q1Choice1" value="b"> |
 		K <input type="radio" name="seriesType"
@@ -60,7 +60,7 @@
 
 <script id="transmissionBlock">
 	<br>
-	Please Enter a Name for the Transmission: <input type="text" id="transmissionName"> <br>
+	Please Enter a Name for the Transmission: <input type="text" name="transmissionName" id="transmissionName"> <br>
 	Please Enter a Price: <input type="text" name="transmissionPrice" id="transmissionPrice"> <br>
 	Please Enter a Quantity: <input type="text" name="transmissionQuantity" id="transmissionQuantity"> <br>
 	Please Select Manual or Automatic: Manual <input type="radio" name="seriesType"
@@ -73,7 +73,7 @@
 
 <script id="usedPartBlock">
 	<br>
-	Please Enter a Name for the Part: <input type="text" id="usedPartName"> <br>
+	Please Enter a Name for the Part: <input type="text" name="usedPartName" id="usedPartName"> <br>
 	Please Give a Description for the Part: <textarea name="usedPartDescription" id="usedPartDescription" 
 	rows="5" cols="40" maxlength="250"></textarea> <br>
 	Please Enter a Price: <input type="text" name="usedPartPrice" id="usedPartPrice"> <br>
@@ -104,7 +104,7 @@
 
 	<br>
 	
-	<form action="usedPartRemove">
+	<form action="/usedPartRemove">
 	<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
 		Remove a Used Part
 	</button>

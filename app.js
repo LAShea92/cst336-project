@@ -137,6 +137,29 @@ app.get("/usedPartEdit", function(req,res){
 		});
 });
 
+app.get("/changeConfirm", function(req,res){
+	res.render("changeConfirm");
+});
+
+app.get("/api/addItems", function(req, res){
+	var conn = tools.createConnection();
+	var sql;
+	var sqlParams;
+	
+	if (req.query.partType=="engine"){
+		sql = "INSERT INTO engines (name,series,description,price,miles) VALUES (?,?,?,?,?)"
+		sqlParams = [req.query.name, req.query.series, req.query.description, req.query.price, req.query.miles]
+	}
+	else if (req.query.partType=="transmission"){
+		sql = "INSERT INTO transmissions (name,series,price,quantity) VALUES (?,?,?,?)"
+		sqlParams = [req.query.name, req.query.series, req.query.price, req.query.quantity]
+	}
+	else if (req.query.partType=="usedPart"){
+		sql = "INSERT INTO used_parts (name,usedPartType,price,description) VALUES (?,?,?,?)"
+			sqlParams = [req.query.name, req.query.usedPartType, req.query.price, req.query.description]
+	}
+});
+
 app.listen("8081", "0.0.0.0", function(){
    console.log("Express Server is running...")
 })
