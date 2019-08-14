@@ -37,6 +37,14 @@ app.get("/cart", function(req,res){
   res.render("cart");
 });
 
+app.get("/adminChanges", function(req,res){
+	res.render("adminChanges");
+});
+
+app.get("/adminSelect", function(req,res){
+	res.render("adminSelect");
+});
+
 app.listen("8081", "0.0.0.0", function(){
    console.log("Express Server is running...")
 })

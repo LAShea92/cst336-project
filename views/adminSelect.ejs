@@ -1,0 +1,27 @@
+<% include partials/header %>
+    <h1>Administration</h1>
+    <% include partials/nav %>
+     
+     <br>
+     
+    <form action="/adminChanges" method="GET" style="text-align: center">
+    
+    <button type="submit" name="adminReq" value="add" class="adminSelectBtn btn btn-info">
+    	Add an Item
+    </button>
+    
+    <br><br>
+    
+    <button type="submit" name="adminReq" value="remove" class="adminSelectBtn btn btn-info">
+    	Remove an Item
+    </button>
+    
+    <br><br>
+    
+    <button type="submit" name="adminReq" value="edit" class="adminSelectBtn btn btn-info">
+    	Edit an Item
+    </button>
+    
+    </form>    
+
+<% include partials/footer %>
