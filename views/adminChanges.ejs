@@ -82,60 +82,68 @@
 </script>
 
 <script id="removeBlock">
-	<form id="removeItem" style="text-align: center; display: show">
+	<div id="removeItem" style="text-align: center; display: show">
 
-	Would you like to remove an Engine, Transmission, New Part, or Used Part?
+	Would you like to remove an Engine, Transmission, or Used Part?
 			
-	<div id="question1">
-	Engine <input type="radio" name="partChoice" onchange="removeCheck()"
-		id="q1Choice1" value="1"> |
-	Transmission <input type="radio" name="partChoice" onchange="removeCheck()"
-		id="q1Choice2" value="1"> |
-	Used Part <input type="radio" name="partChoice" onchange="removeCheck()"
-		id="q1Choice3" value="1">
-	</div>
+	<form action="/engineRemove">
+	<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
+		Remove an Engine
+	</button>
+	</form>
 	
-	<div id="additionalInfo"></div>
-			
+	<br>
+	
+	<form action="/transmissionRemove">
+	<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
+		Remove a Transmission
+	</button>
 	</form>
 
-</script>
+	<br>
+	
+	<form action="usedPartRemove">
+	<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
+		Remove a Used Part
+	</button>
+	</form>
 
-<script id="removeEngineBlock">
-<% rows.forEach(function(row, i){ %>
-<%- (i%5==0)?'<br>':'' %>
-	<div class="imageContainer">
-		<img class="image" src='<%=row.imgSrc%>' width='200' height='200'>
-		<div id="info">
-			Name: <span id="name"><%=row.name%></span>
-			Price: <span id="price"><%=row.price%></span>
-		</div>
-		REMOVE <input type="radio" name="removeChoice"
-			id=<%=row.id%> value="1">
+	<br>
+			
 	</div>
-<% }) %>
 
-<button class="setupBtn btn btn-danger">Remove Item</button>
 </script>
 
 <script id="editBlock">
-	<form id="addItem" style="text-align: center; display: show">
-	
-	Would you like to edit an Engine, Transmission, New Part, or Used Part?
-			
-	<div id="question1">
-	Engine <input type="radio" name="partChoice" onchange="typeCheck()"
-		id="q1Choice1" value="1"> |
-	Transmission <input type="radio" name="partChoice" onchange="typeCheck()"
-		id="q1Choice2" value="1"> |
-	Used Part <input type="radio" name="partChoice" onchange="typeCheck()"
-		id="q1Choice3" value="1">
-	</div>
-			
-			<button class="setupBtn btn btn-success">Edit Item</button>
-			</form>
-	
-	<!--LOAD ALL PARTS-->
+<div id="editItem" style="text-align: center; display: show">
+
+Would you like to remove an Engine, Transmission, or Used Part?
+		
+<form action="/engineEdit">
+<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
+	Edit an Engine
+</button>
+</form>
+
+<br>
+
+<form action="/transmissionEdit">
+<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
+	Edit a Transmission
+</button>
+</form>
+
+<br>
+
+<form action="usedPartEdit">
+<button type="submit" name="adminReq" value="remove" class="removeSelectBtn btn btn-info">
+	Edit a Used Part
+</button>
+</form>
+
+<br>
+		
+</div>
 </script>
 
 <script>
@@ -170,12 +178,12 @@ function removeCheck() {
 	else if(document.getElementById("q1Choice2").checked == true){
 		
 		$("#additionalInfo").empty();
-		$("#additionalInfo").append(document.getElementById('transmissionBlock').innerHTML);
+		$("#additionalInfo").append(document.getElementById('removeTransmissionBlock').innerHTML);
 	}
 	else if(document.getElementById("q1Choice3").checked == true){
 		
 		$("#additionalInfo").empty();
-		$("#additionalInfo").append(document.getElementById('usedPartBlock').innerHTML);
+		$("#additionalInfo").append(document.getElementById('removeUsedPartBlock').innerHTML);
 	}
 }
 

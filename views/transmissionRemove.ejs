@@ -1,0 +1,65 @@
+<% include partials/header %>
+    <h1>Administration</h1>
+    <% include partials/nav %>
+    
+    <!-- 
+          There should be a function here that will 
+     	  create a majority of the page depending on the 
+     	  request passed in. 
+     	  If add, create the add page.
+     	  If remove, create the remove page.
+     	  If edit, create the edit page.
+     -->
+     
+<br>     
+     
+<form action="/adminSelect" style="text-align: center">
+
+<button class="returnBtn btn btn-info"> <- Back </button>
+
+</form>
+
+<br>
+
+<form style="text-align: center">
+
+<h1>REMOVE A TRANSMISSION</h1>
+
+	<div id="content">
+		<% rows.forEach(function(row, i){ %>
+		<%- (i%5==0)?'<br>':'' %>
+			<div class="imageContainer">
+				<img class="image" src='<%=row.imgSrc%>' width='200' height='200'>
+				<div id="info">
+					Name: <span id="name"><%=row.name%></span> <br>
+					Price: <span id="price">$<%=row.price%></span> <br>
+				</div>
+				REMOVE <input type="radio" name="partChoice" onchange="addCheck()"
+		id=<%=row.id%> value="transmission">
+			</div>
+		<% }) %>
+		</div>
+
+	<button class="setupBtn btn btn-danger">Remove Transmission</button>
+
+</form>
+
+<br> 
+     
+<div id="adReq"></div>
+
+<script>
+window.onload = function(){
+	//pageSetup();
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+</script>
+
+<% include partials/footer %>

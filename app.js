@@ -52,21 +52,89 @@ app.get("/cart", function(req,res){
 });
 
 app.get("/adminChanges", function(req,res){
-	  let conn = tools.createConnection({multipleStatements: true});
-	  var sqlE = "SELECT * FROM `engines` ORDER BY dateAdded"
-	  var sqlT = "SELECT * FROM `transmissions` ORDER BY date"
-
-		conn.connect(function(err){
-			if(err) throw err;
-			conn.query(sqlE, sqlT, function(err, results){
-				if(err) throw err;
-				res.render("adminChanges", {"rows":results});
-			});
-		});
+  res.render("adminChanges");
 });
 
 app.get("/adminSelect", function(req,res){
 	res.render("adminSelect");
+});
+
+app.get("/engineRemove", function(req,res){
+	let conn = tools.createConnection();
+		var sql = "SELECT * FROM `engines` ORDER BY dateAdded"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("engineRemove", {"rows":results});
+			});
+		});
+});
+
+app.get("/transmissionRemove", function(req,res){
+	let conn = tools.createConnection();
+		var sql = "SELECT * FROM `transmissions` ORDER BY date"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("transmissionRemove", {"rows":results});
+			});
+		});
+});
+
+app.get("/usedPartRemove", function(req,res){
+	let conn = tools.createConnection();
+		var sql = "SELECT * FROM `used_parts` ORDER BY date"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("usedPartRemove", {"rows":results});
+			});
+		});
+});
+
+app.get("/engineEdit", function(req,res){
+	let conn = tools.createConnection();
+		var sql = "SELECT * FROM `engines` ORDER BY dateAdded"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("engineEdit", {"rows":results});
+			});
+		});
+});
+
+app.get("/transmissionEdit", function(req,res){
+	let conn = tools.createConnection();
+		var sql = "SELECT * FROM `transmissions` ORDER BY date"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("transmissionEdit", {"rows":results});
+			});
+		});
+});
+
+app.get("/usedPartEdit", function(req,res){
+	let conn = tools.createConnection();
+		var sql = "SELECT * FROM `used_parts` ORDER BY date"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("usedPartEdit", {"rows":results});
+			});
+		});
 });
 
 app.listen("8081", "0.0.0.0", function(){
