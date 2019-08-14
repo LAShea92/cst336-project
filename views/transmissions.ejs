@@ -1,5 +1,17 @@
 <% include partials/header %>
-    <h1>Transmissions</h1>
-    <% include partials/nav %>
+  <h1>Transmissions</h1>
+  <% include partials/nav %>
+	<div id="content">
+		<% rows.forEach(function(row, i){ %>
+		<%- (i%5==0)?'<br>':'' %>
+			<div class="imageContainer">
+				<img class="image" src='<%=row.imgSrc%>' width='200' height='200'>
+				<div id="info">
+					<span id="name"><%=row.name%></span>
+					<span id="price"><%=row.price%></span>
+				</div>
+			</div>
+		<% }) %>
+		</div>
 
 <% include partials/footer %>

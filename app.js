@@ -18,19 +18,33 @@ app.get("/itemDetail", function(req,res){
 });
 
 app.get("/engines", function(req,res){
-  res.render("engines");
+	  let conn = tools.createConnection();
+		var sql = "SELECT name, description, price, dateAdded, imgSrc FROM `engines` ORDER BY dateAdded"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("engines", {"rows":results});
+			});
+		});
 });
 
 app.get("/transmissions", function(req,res){
-  res.render("transmissions");
+	   let conn = tools.createConnection();
+		var sql = "SELECT name, price, date, imgSrc FROM `transmissions` ORDER BY date"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sql, function(err, results){
+				if(err) throw err;
+				res.render("transmissions", {"rows":results});
+			});
+		});
 });
 
 app.get("/usedParts", function(req,res){
   res.render("usedParts");
-});
-
-app.get("/newParts", function(req,res){
-  res.render("newParts");
 });
 
 app.get("/cart", function(req,res){
@@ -38,7 +52,17 @@ app.get("/cart", function(req,res){
 });
 
 app.get("/adminChanges", function(req,res){
-	res.render("adminChanges");
+	  let conn = tools.createConnection({multipleStatements: true});
+	  var sqlE = "SELECT * FROM `engines` ORDER BY dateAdded"
+	  var sqlT = "SELECT * FROM `transmissions` ORDER BY date"
+
+		conn.connect(function(err){
+			if(err) throw err;
+			conn.query(sqlE, sqlT, function(err, results){
+				if(err) throw err;
+				res.render("adminChanges", {"rows":results});
+			});
+		});
 });
 
 app.get("/adminSelect", function(req,res){

@@ -82,23 +82,40 @@
 </script>
 
 <script id="removeBlock">
-	<form id="addItem" style="text-align: center; display: show">
+	<form id="removeItem" style="text-align: center; display: show">
 
 	Would you like to remove an Engine, Transmission, New Part, or Used Part?
 			
 	<div id="question1">
-	Engine <input type="radio" name="partChoice" onchange="typeCheck()"
+	Engine <input type="radio" name="partChoice" onchange="removeCheck()"
 		id="q1Choice1" value="1"> |
-	Transmission <input type="radio" name="partChoice" onchange="typeCheck()"
+	Transmission <input type="radio" name="partChoice" onchange="removeCheck()"
 		id="q1Choice2" value="1"> |
-	Used Part <input type="radio" name="partChoice" onchange="typeCheck()"
+	Used Part <input type="radio" name="partChoice" onchange="removeCheck()"
 		id="q1Choice3" value="1">
 	</div>
-			
-			<button class="setupBtn btn btn-danger">Remove Item</button>
-			</form>
 	
-	<!--LOAD ALL PARTS-->
+	<div id="additionalInfo"></div>
+			
+	</form>
+
+</script>
+
+<script id="removeEngineBlock">
+<% rows.forEach(function(row, i){ %>
+<%- (i%5==0)?'<br>':'' %>
+	<div class="imageContainer">
+		<img class="image" src='<%=row.imgSrc%>' width='200' height='200'>
+		<div id="info">
+			Name: <span id="name"><%=row.name%></span>
+			Price: <span id="price"><%=row.price%></span>
+		</div>
+		REMOVE <input type="radio" name="removeChoice"
+			id=<%=row.id%> value="1">
+	</div>
+<% }) %>
+
+<button class="setupBtn btn btn-danger">Remove Item</button>
 </script>
 
 <script id="editBlock">
@@ -131,6 +148,24 @@ function addCheck() {
 		
 		$("#additionalInfo").empty();
 		$("#additionalInfo").append(document.getElementById('engineBlock').innerHTML);
+	}
+	else if(document.getElementById("q1Choice2").checked == true){
+		
+		$("#additionalInfo").empty();
+		$("#additionalInfo").append(document.getElementById('transmissionBlock').innerHTML);
+	}
+	else if(document.getElementById("q1Choice3").checked == true){
+		
+		$("#additionalInfo").empty();
+		$("#additionalInfo").append(document.getElementById('usedPartBlock').innerHTML);
+	}
+}
+
+function removeCheck() {
+	if(document.getElementById("q1Choice1").checked == true){
+		
+		$("#additionalInfo").empty();
+		$("#additionalInfo").append(document.getElementById('removeEngineBlock').innerHTML);
 	}
 	else if(document.getElementById("q1Choice2").checked == true){
 		
