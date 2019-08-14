@@ -35,15 +35,20 @@ app.get("/engines", function(req,res){
 });
 
 app.get("/transmissions", function(req,res){
-  res.render("transmissions");
+   let conn = tools.createConnection();
+	var sql = "SELECT name, price, date, imgSrc FROM `transmissions` ORDER BY date"
+	
+	conn.connect(function(err){
+		if(err) throw err;
+		conn.query(sql, function(err, results){
+			if(err) throw err;
+			res.render("transmissions", {"rows":results});
+		});
+	});
 });
 
 app.get("/usedParts", function(req,res){
   res.render("usedParts");
-});
-
-app.get("/newParts", function(req,res){
-  res.render("newParts");
 });
 
 app.get("/cart", function(req,res){
