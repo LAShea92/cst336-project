@@ -26,6 +26,14 @@
 	font-weight: bold;
 }
 
+#formContainer{
+	text-align: center;
+}
+
 #viewCart{
+	float: right;
+}
+
+#login{
 	float: right;
 }

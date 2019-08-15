@@ -1,9 +1,18 @@
 <% include partials/header %>
   <h1>HPartsonline</h1>
+	<div id="loginForm">
+		Username: <input type="text" name="username" id="username"><br>
+		Password: <input type="password" name="password" id="password"><br>
+		<button id="loginButton" class="btn btn-success">Login</button>
+	</div>
+	<div id="adminDisplay" style="display: none;">
+		<span>Welcome, admin!</span>
+		<button id="logoutButton" class="btn btn-info">Logout</button>
+	</div>
 	<form>
 		See items between <input type="text" id="lower"> and <input type="text" id="upper"> dollars
 	</form>
-	<button type="button" id="viewCart" class="btn btn-info">VIEW CART</button>
+  <button type="submit" class="btn btn-secondary" id="viewCart" data-toggle="modal" data-target="#detailModal">View Cart</button>
 	<div id="content">	
 		<% inventory.forEach(function(item){ %>
 			<div class="itemContainer">
@@ -11,11 +20,13 @@
 				<span id="desc">Details: <%=item.description%></span>
 				<div class="info">
 					<div id="name"><%=item.name%></div>
-					<button type="button" class="btn btn-secondary">ADD TO CART</button>
+					<button type="button" class="add" data-item-price='<%=item.price%>' data-item-name='<%=item.name%>'>ADD TO CART</button>
 					<span id="price">  <%=item.price%></span><span id="dollar">$</span>
 				</div>
+				<button class="btn btn-danger" id="delete" style="display:none" data-item-price='<%=item.price%>' data-item-name='<%=item.name%>>REMOVE ITEM</button>
 			</div>
 			<br />
 		<% }) %>
 	</div>
+	<% include partials/detail %>
 <% include partials/footer %>

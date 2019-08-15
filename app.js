@@ -22,6 +22,45 @@ app.get("/", function(req,res){
 	});
 });
 
+// app.get("/login", function(req, res){
+// 	res.render("login");
+// });
+
+app.use(express.urlencoded({extended: true}));
+
+app.post("/api/login", function(req, res){
+	let username = req.body.username;
+	let password = req.body.password;
+	let conn = tools.createConnection();
+	let sql = "SELECT username, password FROM `admin` WHERE username = ? AND password = ?"
+	
+	conn.connect(function(err){
+    if(err) throw err;
+    conn.query(sql, [username, password], function(err, results){
+      if(err) throw err;
+			console.log(results);
+			res.send(
+				{
+					successful: results.length > 0
+				}
+			)
+    });//query
+  });
+});
+
+app.get("/api/removeItem", function(req, res){
+	let conn = tools.createConnection();
+	var sql = "DELETE FROM `inventory` WHERE name = ? AND price = ?";
+  var sqlParams = [req.query.name, req.query.price];
+	
+	 conn.connect(function(err){
+    if (err) throw err;
+    conn.query(sql, sqlParams, function(err, result){
+      if (err) throw err;
+    });//query
+  });//connect
+});
+
 app.get("/api/sortByDate", function(req, res){
 	let conn = tools.createConnection();
 	let sql ="SELECT name, description, price, category, date, imgSrc FROM `inventory` ORDER BY date"
@@ -33,7 +72,7 @@ app.get("/api/sortByDate", function(req, res){
 			res.render("index", {"inventory":results});
 		});
 	});
-})
+});
 
 app.get("/api/sortByPrice", function(req, res){
 	let conn = tools.createConnection();
@@ -46,7 +85,7 @@ app.get("/api/sortByPrice", function(req, res){
 			res.sent(results);
 		});
 	});
-})
+});
 
 app.get("/api/sortByCategory", function(req, res){
 	let conn = tools.createConnection();
@@ -59,10 +98,6 @@ app.get("/api/sortByCategory", function(req, res){
 			res.sent(results);
 		});
 	});
-})
-
-app.get("/cart", function(req,res){
-  res.render("cart");
 });
 
 app.listen("8081", "0.0.0.0", function(){
