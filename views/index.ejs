@@ -1,4 +1,21 @@
 <% include partials/header %>
-  <h1>Home</h1>
-  <% include partials/nav %>
+  <h1>HPartsonline</h1>
+	<form>
+		See items between <input type="text" id="lower"> and <input type="text" id="upper"> dollars
+	</form>
+	<button type="button" id="viewCart" class="btn btn-info">VIEW CART</button>
+	<div id="content">	
+		<% inventory.forEach(function(item){ %>
+			<div class="itemContainer">
+				<img class="image" src='<%=item.imgSrc%>' width='200' height='200'>
+				<span id="desc">Details: <%=item.description%></span>
+				<div class="info">
+					<div id="name"><%=item.name%></div>
+					<button type="button" class="btn btn-secondary">ADD TO CART</button>
+					<span id="price">  <%=item.price%></span><span id="dollar">$</span>
+				</div>
+			</div>
+			<br />
+		<% }) %>
+	</div>
 <% include partials/footer %>

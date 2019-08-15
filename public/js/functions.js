@@ -1,22 +1,20 @@
-let item;
+let itemPrices = [];
+let itemNames = [];
+
 $(document).ready(function(){	
 	//alert($(this).text().trim());
-		$.ajax({
-			method: "get",
-			url: "/engines",
-			success: function(rows, status){
-				$("#invContainer").html("");
-				console.log(rows[0].imgSrc);
-				rows.forEach(function(row, i){
-					console.log(rows[0].imgSrc);
-					if(i%5==0){
-						$("#invContainer").append("<br />");
-					}
-					$("#invContainer").append("<img class='image' src='"+row.imgSrc+"'width='200' height='200'>");
-				})
-			}
-		});//ajax
+	const addToCart = () => {
+		$(".btn").on("click", function(){
+			console.log($(this).prev().val());
+			console.log($(this).next().val());
+			
+			itemNames.push($(this).prev().val());
+			itemPrices.push($(this).next().val());
+		});
+	}
 	
+	addToCart()
+		
 	function updateCart(action, name, price){
 		$.ajax({
 			method: "get",
@@ -26,5 +24,5 @@ $(document).ready(function(){
 					  "action": action
 					 }
 		});
-	}
+	}//updateCart
 });

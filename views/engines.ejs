@@ -1,16 +1,15 @@
 <% include partials/header %>
   <h1>Engines</h1>
 	<% include partials/nav %>
-		<div id="content">
-		<% rows.forEach(function(row, i){ %>
+		<% engines.forEach(function(engine, i){ %>
 		<%- (i%5==0)?'<br>':'' %>
 			<div class="imageContainer">
-				<img class="image" src='<%=row.imgSrc%>' width='200' height='200'>
+				<span id="name"><%=engine.name%></span><br />
+				<img class="image" src='<%=engine.imgSrc%>' width='200' height='200' data-toggle="modal" data-target="#detailModal">
 				<div id="info">
-					<span id="name"><%=row.name%></span>
-					<span id="price"><%=row.price%></span>
+					<span id="price">$<%=engine.price%></span>
 				</div>
 			</div>
-		<% }) %>
 		</div>
+		<% include partials/detail %>
 <% include partials/footer %>
