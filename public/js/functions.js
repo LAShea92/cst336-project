@@ -32,7 +32,10 @@ $(document).ready(function(){
 					if(isAdmin){
 						$("#loginForm").toggle();
 						$("#adminDisplay").toggle();
-						$("#delete").toggle();
+						$(".removeItem").toggle();
+						$("#viewCart").toggle();
+						$(".add").toggle();
+						$("#sortByPrice").toggle();
 					}
 					else{
 						//todo
@@ -42,12 +45,20 @@ $(document).ready(function(){
 		});
 	}
 	
+	const logout = () => {
+		$("#logoutButton").on("click", function(){
+    	location.reload();
+		});
+	}
+	
 	const deleteItem = () => {
-		$("#loginButton").on("click", function(){
+		$(".removeItem").on("click", function(){
 			itemName = $(this).attr("data-item-name");
 			itemPrice = $(this).attr("data-item-price");
+			console.log(itemName);
+			console.log(itemPrice);
 			$.ajax({
-				method: "post",
+				method: "get",
 				url: "/api/removeItem",
 				data: {
 							 "name" : itemName,
@@ -59,7 +70,8 @@ $(document).ready(function(){
 	
 	addToCart();
 	login();
-	
+	logout();
+	deleteItem();
 	
 	function updateCart(name, price){
 // 		console.log(name);

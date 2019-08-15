@@ -9,7 +9,7 @@
 		<span>Welcome, admin!</span>
 		<button id="logoutButton" class="btn btn-info">Logout</button>
 	</div>
-	<form>
+	<form id="sortByPrice">
 		See items between <input type="text" id="lower"> and <input type="text" id="upper"> dollars
 	</form>
   <button type="submit" class="btn btn-secondary" id="viewCart" data-toggle="modal" data-target="#detailModal">View Cart</button>
@@ -23,7 +23,7 @@
 					<button type="button" class="add" data-item-price='<%=item.price%>' data-item-name='<%=item.name%>'>ADD TO CART</button>
 					<span id="price">  <%=item.price%></span><span id="dollar">$</span>
 				</div>
-				<button class="btn btn-danger" id="delete" style="display:none" data-item-price='<%=item.price%>' data-item-name='<%=item.name%>>REMOVE ITEM</button>
+				<button class="removeItem" id="delete" style="display:none" data-item-price='<%=item.price%>' data-item-name='<%=item.name%>'>REMOVE ITEM</button>
 			</div>
 			<br />
 		<% }) %>

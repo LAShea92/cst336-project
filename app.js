@@ -57,6 +57,7 @@ app.get("/api/removeItem", function(req, res){
     if (err) throw err;
     conn.query(sql, sqlParams, function(err, result){
       if (err) throw err;
+			console.log(result);
     });//query
   });//connect
 });
