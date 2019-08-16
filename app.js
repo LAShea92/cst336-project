@@ -8,15 +8,21 @@ const request = require("request");
 const mysql = require("mysql");
 const tools = require("./tools.js");
 
+app.prototype.filter = {
+	appendSQL: "ORDER BY name",
+	sort: []
+}
+
 //root route
 app.get("/", function(req,res){
-  let conn = tools.createConnection();
-	let sql = "SELECT name, description, price, category, date, imgSrc FROM `inventory` ORDER BY name"
+	let sql = "SELECT name, description, price, category, date, imgSrc FROM `inventory` ORDER BY name";
 	
+	let conn = tools.createConnection();
 	conn.connect(function(err){
 		if(err) throw err;
 		conn.query(sql, function(err, results){
 			if(err) throw err;
+			// Debug
 			res.render("index", {"inventory":results});
 		});
 	});
@@ -83,20 +89,21 @@ app.get("/api/sortByPrice", function(req, res){
 		if(err) throw err;
 		conn.query(sql, sqlParams, function(err, results){
 			if(err) throw err;
-			res.sent(results);
+			res.send(results);
 		});
 	});
 });
 
-app.get("/api/sortByCategory", function(req, res){
+app.get("/sortCategory", function(req, res){
 	let conn = tools.createConnection();
 	let sql = "SELECT name, description, price, category, date, imgSrc FROM `inventory` WHERE category = ?"
-	let sqlParams = [req.query.lower];
+	let sqlParams = [req.query.catId];
 	conn.connect(function(err){
 		if(err) throw err;
 		conn.query(sql, sqlParams, function(err, results){
 			if(err) throw err;
-			res.sent(results);
+			res.render("sortedCategory", {"inventory":results});
+			console.log(results);
 		});
 	});
 });
